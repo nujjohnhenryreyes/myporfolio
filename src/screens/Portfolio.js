@@ -22,12 +22,12 @@ const Index = () => {
   const mode = localStorage.getItem("light-mode");
   
   /* States */
-  const [isLoading, loadingState] = React.useState(true);
-  const [isLightMode, lightModesState] = React.useState(([null, `true`].includes(mode))? true : false);
-  const [imageViewer, imageViewerState] = React.useState({ photoIndex: 0, isOpen: false });
-  const [projectCode, projectCodeState] = React.useState(null);
-  const [images, imagesState] = React.useState([]);
-  const [admin, adminState] = React.useState({
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLightMode, setIsLightMode] = React.useState(([null, `true`].includes(mode))? true : false);
+  const [imageViewer, setImageViewer] = React.useState({ photoIndex: 0, isOpen: false });
+  const [projectCode, setProjectCode] = React.useState(null);
+  const [images, setImages] = React.useState([]);
+  const [admin, setAdmin] = React.useState({
       firstName: "Nuj John Henry",
       middleName: "Vera",
       lastName: "Reyes",
@@ -38,7 +38,7 @@ const Index = () => {
       completeAddress: "145 Panapaan IV, Bacoor, Cavite"
   });
 
-  const [projects, projectState] = React.useState([
+  const [projects, setProjects] = React.useState([
       { 
         title: "THESIS: eJOBCAV", 
         finishedOn: "July 2019",
@@ -58,12 +58,12 @@ const Index = () => {
   /* Effects */
   React.useEffect(() => {
     setTimeout(() => {
-      loadingState(false);
+      setIsLoading(false);
     }, 1000);
   }, []);
 
   const handleMouseHover = (e, status) => {
-      projectCodeState(status);
+      setProjectCode(status);
       e.target.style.backgroundColor = (!status) ? "transparent" : "#767777";     
   }
 
@@ -73,18 +73,18 @@ const Index = () => {
     for(let i = 0; i < setOfImages.length; i++){
         newSetOfImages.push(require(`../assets/img/${setOfImages[i]}`))
     }
-    imagesState(newSetOfImages);    
-    imageViewerState({ ...imageViewer, ["isOpen"]: true })     
+    setImages(newSetOfImages);    
+    setImageViewer({ ...imageViewer, ["isOpen"]: true })     
   }
 
   /* Functions */
   const onCloseRequest = () => {
-    imagesState([]);
-    imageViewerState({ photoIndex: 0, isOpen: false });
+    setImages([]);
+    setImageViewer({ photoIndex: 0, isOpen: false });
   }
 
   const switchMode = (e) => {
-    lightModesState(e.target.checked);
+    setIsLightMode(e.target.checked);
     localStorage.setItem("light-mode", e.target.checked);
   }
 
@@ -134,10 +134,10 @@ const Index = () => {
                 prevSrc={images[(imageViewer.photoIndex + images.length - 1) % images.length]}
                 onCloseRequest={() => onCloseRequest()}
                 onMovePrevRequest={() =>
-                    imageViewerState({ ...imageViewer, ["photoIndex"]: (imageViewer.photoIndex + images.length - 1) % images.length})
+                    setImageViewer({ ...imageViewer, ["photoIndex"]: (imageViewer.photoIndex + images.length - 1) % images.length})
                 }
                 onMoveNextRequest={() =>
-                    imageViewerState({ ...imageViewer, ["photoIndex"]: (imageViewer.photoIndex + 1) % images.length })
+                    setImageViewer({ ...imageViewer, ["photoIndex"]: (imageViewer.photoIndex + 1) % images.length })
                 }
             />
         )}

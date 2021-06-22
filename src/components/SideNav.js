@@ -18,7 +18,7 @@ import {
 import Theme from '../constants/Theme';
 
 const SideNav = (props) => {
-    const [navigation, navigationState] = React.useState({
+    const [navigation, setNavigation] = React.useState({
         portfolio: "PORTFOLIO",
         resume: "RESUME",
         aboutMe: "ABOUT ME",
@@ -26,10 +26,10 @@ const SideNav = (props) => {
         signIn: "SIGN IN",
     });
 
-    const [social, socialState] = React.useState({
+    const [social, setSocial] = React.useState({
         facebook: "https://www.facebook.com/nujreyes00/",
         linkedIn: "https://www.linkedin.com/in/nuj-reyes-4250391b3/",
-        gitHub: "https://github.com/nujjohnhenryreyes"
+        gitLab: "https://gitlab.com/nujjohnhenryreyes"
     });
 
     const handleMouseHover = (e, color) => {
@@ -56,8 +56,8 @@ const SideNav = (props) => {
                     <Link to="route" target="_blank" onClick={() => { window.open(social.linkedIn); }} style={styles.socialLinks} >
                         <i className="fa fa-linkedin-square" /> 
                     </Link>
-                    <Link to="route" target="_blank" onClick={() => { window.open(social.gitHub); }} style={styles.socialLinks} >
-                    <i className="fa fa-github" />
+                    <Link to="route" target="_blank" onClick={() => { window.open(social.gitLab); }} style={styles.socialLinks} >
+                    <i className="fa fa-gitlab" />
                     </Link>
                 </Col>
                 <Col sm={12} style={styles.navColumn} align="center">

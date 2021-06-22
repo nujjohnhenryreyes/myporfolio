@@ -27,9 +27,9 @@ const Index = () => {
   const mode = localStorage.getItem("light-mode");
 
   /* States */
-  const [isLoading, loadingState] = React.useState(true);
-  const [isLightMode, lightModesState] = React.useState(([null, `true`].includes(mode))? true : false);
-  const [error, errorState] = React.useState({});
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLightMode, setIsLightMode] = React.useState(([null, `true`].includes(mode))? true : false);
+  const [errors, setErrors] = React.useState({});
   const [admin, adminState] = React.useState({
       firstName: "Nuj John Henry",
       middleName: "Vera",
@@ -41,7 +41,7 @@ const Index = () => {
       completeAddress: "145 Panapaan IV, Bacoor, Cavite"
   });
   
-  const [form, formState] = React.useState({
+  const [form, setForm] = React.useState({
     fullName: "",
     emailAddress: "",
     subject: "",
@@ -51,7 +51,7 @@ const Index = () => {
   /* Effects */
   React.useEffect(() => {
     setTimeout(() => {
-      loadingState(false);
+      setIsLoading(false);
     }, 1000);
   }, []);
 
@@ -60,19 +60,19 @@ const Index = () => {
     form[stateName] = e.target.value;
 
     if (!e.target.value) {
-      error[stateName] = "Please enter your ";
+      errors[stateName] = "Please enter your ";
     } else {
       if (stateName === "emailAddress") {
-        error[stateName] = (!validator.check(form[stateName], "required|email")) 
+        errors[stateName] = (!validator.check(form[stateName], "required|email")) 
           ?  "Please enter a valid "
           :  null;
       } else {
-        error[stateName] = null;
+        errors[stateName] = null;
       }
     }
 
-    formState({ ...form });
-    errorState({ ...error });
+    setForm({ ...form });
+    setErrors({ ...errors });
   }
 
   const handleMouseHover = (e, hover) => {
@@ -82,7 +82,7 @@ const Index = () => {
   } 
 
   const switchMode = (e) => {
-    lightModesState(e.target.checked);
+    setIsLightMode(e.target.checked);
     localStorage.setItem("light-mode", e.target.checked);
   }
 
@@ -142,21 +142,21 @@ const Index = () => {
                                             <Input 
                                              className={
                                               (!isLightMode) 
-                                                ? classnames({ "border border-warning": error.fullName }) 
-                                                : classnames({ "border border-danger": error.fullName }) 
+                                                ? classnames({ "border border-warning": errors.fullName }) 
+                                                : classnames({ "border border-danger": errors.fullName }) 
                                               }
                                             type="text" 
                                             placeholder="Name" 
                                             onChange={(e) => handleOnChange(e, "fullName")} 
                                             style={styles.textbox}/>
                                             {
-                                                error.fullName
+                                                errors.fullName
                                                 ? <small 
                                                     className={`pl-2 ${
                                                       (!isLightMode) 
-                                                        ? classnames({ "text-warning": error.fullName }) 
-                                                        : classnames({ "text-danger": error.fullName }) 
-                                                    }`}>* {error.fullName} name</small>
+                                                        ? classnames({ "text-warning": errors.fullName }) 
+                                                        : classnames({ "text-danger": errors.fullName }) 
+                                                    }`}>* {errors.fullName} name</small>
                                                 : null
                                             }
                                         </FormGroup>
@@ -164,21 +164,21 @@ const Index = () => {
                                             <Input 
                                                 className={
                                                   (!isLightMode) 
-                                                    ? classnames({ "border border-warning": error.emailAddress }) 
-                                                    : classnames({ "border border-danger": error.emailAddress }) 
+                                                    ? classnames({ "border border-warning": errors.emailAddress }) 
+                                                    : classnames({ "border border-danger": errors.emailAddress }) 
                                                 }
                                                 type="text" 
                                                 placeholder="What's your email?" 
                                                 onChange={(e) => handleOnChange(e, "emailAddress")} 
                                                 style={styles.textbox}/>
                                                 {
-                                                    error.emailAddress
+                                                    errors.emailAddress
                                                     ? <small 
                                                         className={`pl-2 ${
                                                           (!isLightMode) 
-                                                            ? classnames({ "text-warning": error.emailAddress }) 
-                                                            : classnames({ "text-danger": error.emailAddress }) 
-                                                        }`}>* {error.emailAddress} email address</small>
+                                                            ? classnames({ "text-warning": errors.emailAddress }) 
+                                                            : classnames({ "text-danger": errors.emailAddress }) 
+                                                        }`}>* {errors.emailAddress} email address</small>
                                                     : null
                                                 }
                                         </FormGroup> 
@@ -186,21 +186,21 @@ const Index = () => {
                                             <Input 
                                                 className={
                                                   (!isLightMode) 
-                                                    ? classnames({ "border border-warning": error.subject }) 
-                                                    : classnames({ "border border-danger": error.subject }) 
+                                                    ? classnames({ "border border-warning": errors.subject }) 
+                                                    : classnames({ "border border-danger": errors.subject }) 
                                                 }
                                                 type="text" 
                                                 placeholder="Last Name" 
                                                 onChange={(e) => handleOnChange(e, "subject")} 
                                                 style={styles.textbox}/>
                                                 {
-                                                    error.subject
+                                                    errors.subject
                                                     ? <small 
                                                         className={`pl-2 ${
                                                           (!isLightMode) 
-                                                            ? classnames({ "text-warning": error.subject }) 
-                                                            : classnames({ "text-danger": error.subject }) 
-                                                        }`}>* {error.subject} subject</small>
+                                                            ? classnames({ "text-warning": errors.subject }) 
+                                                            : classnames({ "text-danger": errors.subject }) 
+                                                        }`}>* {errors.subject} subject</small>
                                                     : null
                                                 }
                                         </FormGroup>
@@ -208,21 +208,21 @@ const Index = () => {
                                             <Input 
                                                 className={
                                                   (!isLightMode) 
-                                                    ? classnames({ "border border-warning": error.message }) 
-                                                    : classnames({ "border border-danger": error.message }) 
+                                                    ? classnames({ "border border-warning": errors.message }) 
+                                                    : classnames({ "border border-danger": errors.message }) 
                                                 }
                                                 type="textarea"     
                                                 placeholder="Your message ..." 
                                                 onChange={(e) => handleOnChange(e, "message")} 
                                                 style={styles.textarea} />
                                                 {
-                                                    error.message
+                                                    errors.message
                                                     ? <small 
                                                         className={`pl-2 ${
                                                           (!isLightMode) 
-                                                            ? classnames({ "text-warning": error.message }) 
-                                                            : classnames({ "text-danger": error.message }) 
-                                                        }`}>* {error.message} message</small>
+                                                            ? classnames({ "text-warning": errors.message }) 
+                                                            : classnames({ "text-danger": errors.message }) 
+                                                        }`}>* {errors.message} message</small>
                                                     : null
                                                 }
                                         </FormGroup>

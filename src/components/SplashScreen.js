@@ -4,7 +4,7 @@ import Background from './Background';
 import Theme from '../constants/Theme';
 
 const SplashScreen = () => {
-  const [admin, adminState] = React.useState({
+  const [admin, setAdmin] = React.useState({
     firstName: "Nuj John Henry",
     middleName: "Vera",
     lastName: "Reyes",

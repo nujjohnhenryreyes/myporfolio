@@ -27,10 +27,10 @@ const Index = () => {
   const mode = localStorage.getItem("light-mode");
 
   /* States */
-  const [isLoading, loadingState] = React.useState(true);
-  const [isLightMode, lightModesState] = React.useState(([null, `true`].includes(mode))? true : false);
-  const [error, errorState] = React.useState({});
-  const [admin, adminState] = React.useState({
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLightMode, setIsLightMode] = React.useState(([null, `true`].includes(mode))? true : false);
+  const [errors, setErrors] = React.useState({});
+  const [admin, setAdmin] = React.useState({
       firstName: "Nuj John Henry",
       middleName: "Vera",
       lastName: "Reyes",
@@ -40,7 +40,7 @@ const Index = () => {
       emailAddress: "nujjohnhenryreyes@gmail.com",
       completeAddress: "145 Panapaan IV, Bacoor, Cavite"
   });
-  const [form, formState] = React.useState({
+  const [form, setForm] = React.useState({
     username: "",
     password: ""
  });
@@ -48,16 +48,16 @@ const Index = () => {
   /* Effects */
   React.useEffect(() => {
     setTimeout(() => {
-      loadingState(false);
+      setIsLoading(false);
     }, 1000);
   }, []);
 
   /* Handles */
   const handleOnChange = (e, stateName) => {
     form[stateName] = e.target.value;
-    error[stateName] = (!e.target.value) ? "Please enter your" : null;
-    formState({ ...form });
-    errorState({ ...error });
+    errors[stateName] = (!e.target.value) ? "Please enter your" : null;
+    setForm({ ...form });
+    setErrors({ ...errors });
   }
 
   const handleMouseHover = (e, hover) => {
@@ -67,7 +67,7 @@ const Index = () => {
   } 
 
   const switchMode = (e) => {
-    lightModesState(e.target.checked);
+    setIsLightMode(e.target.checked);
     localStorage.setItem("light-mode", e.target.checked);
   }
   
@@ -130,8 +130,8 @@ const Index = () => {
                                               <Input 
                                                 className={
                                                   (!isLightMode) 
-                                                    ? classnames({ "border border-warning": error.username }) 
-                                                    : classnames({ "border border-danger": error.username }) 
+                                                    ? classnames({ "border border-warning": errors.username }) 
+                                                    : classnames({ "border border-danger": errors.username }) 
                                                 }
                                               type="text" 
                                               placeholder="Email or phone number" 
@@ -139,13 +139,13 @@ const Index = () => {
                                               style={styles.textbox}/>
                                               <div style={{ textAlign: "left" }}>
                                                 {
-                                                    error.username
+                                                    errors.username
                                                     ? <small 
                                                         className={`pl-2 ${
                                                           (!isLightMode) 
-                                                            ? classnames({ "text-warning": error.username }) 
-                                                            : classnames({ "text-danger": error.username }) 
-                                                        }`}>* {error.username} email or phone number</small>
+                                                            ? classnames({ "text-warning": errors.username }) 
+                                                            : classnames({ "text-danger": errors.username }) 
+                                                        }`}>* {errors.username} email or phone number</small>
                                                     : null
                                                 }
                                               </div>
@@ -154,8 +154,8 @@ const Index = () => {
                                               <Input 
                                                    className={
                                                     (!isLightMode) 
-                                                      ? classnames({ "border border-warning": error.password }) 
-                                                      : classnames({ "border border-danger": error.password }) 
+                                                      ? classnames({ "border border-warning": errors.password }) 
+                                                      : classnames({ "border border-danger": errors.password }) 
                                                   }
                                                   type="text" 
                                                   placeholder="Password" 
@@ -163,13 +163,13 @@ const Index = () => {
                                                   style={styles.textbox}/>
                                                   <div style={{ textAlign: "left" }}>
                                                     {
-                                                        error.password
+                                                        errors.password
                                                         ? <small 
                                                             className={`pl-2 ${
                                                               (!isLightMode) 
-                                                                ? classnames({ "text-warning": error.password }) 
-                                                                : classnames({ "text-danger": error.password }) 
-                                                            }`}>* {error.password} password</small>
+                                                                ? classnames({ "text-warning": errors.password }) 
+                                                                : classnames({ "text-danger": errors.password }) 
+                                                            }`}>* {errors.password} password</small>
                                                         : null
                                                     }
                                                   </div>

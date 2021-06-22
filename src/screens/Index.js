@@ -21,9 +21,9 @@ const Index = () => {
   const mode = localStorage.getItem("light-mode");
 
   /* States */
-  const [isLoading, loadingState] = React.useState(true);
-  const [isLightMode, lightModesState] = React.useState(([null, `true`].includes(mode))? true : false);
-  const [admin, adminState] = React.useState({
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLightMode, setIsLightMode] = React.useState(([null, `true`].includes(mode))? true : false);
+  const [admin, setAdmin] = React.useState({
       firstName: "Nuj John Henry",
       middleName: "Vera",
       lastName: "Reyes",
@@ -34,7 +34,7 @@ const Index = () => {
       completeAddress: "145 Panapaan IV, Bacoor, Cavite"
   });
   
-  const [abouts, aboutsState] = React.useState([
+  const [abouts, setAbouts] = React.useState([
     "I'm a software engineer specialized in frontend and backend development for complex scalable web apps." + 
     "I enjoy taking complex problems and turning them into simple, better and understandable way." +
     "I also love handling database server and building queries." +
@@ -44,7 +44,7 @@ const Index = () => {
     "You can directly download my resume or view my latest project."
   ]);
 
-  const [technologies, technologyState] = React.useState([
+  const [technologies, setTechnologies] = React.useState([
     { title: "ReactJS", image: "reactjs.png" },
     { title: "NodeJS", image: "nodejs.jpg" },
     { title: "MongoDB", image: "mongodb.png" },
@@ -63,7 +63,7 @@ const Index = () => {
   /* Effects */
   React.useEffect(() => {
     setTimeout(() => {
-      loadingState(false);
+      setIsLoading(false);
     }, 1000);
   }, []);
 
@@ -92,7 +92,7 @@ const Index = () => {
   }
 
   const switchMode = (e) => {
-    lightModesState(e.target.checked);
+    setIsLightMode(e.target.checked);
     localStorage.setItem("light-mode", e.target.checked);
   }
 

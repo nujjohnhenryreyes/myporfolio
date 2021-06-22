@@ -22,9 +22,9 @@ const Resume = () => {
   const mode = localStorage.getItem("light-mode");
   
   /* States */
-  const [isLoading, loadingState] = React.useState(true);
-  const [isLightMode, lightModesState] = React.useState(([null, `true`].includes(mode))? true : false);
-  const [admin, adminState] = React.useState({
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLightMode, setIsLightMode] = React.useState(([null, `true`].includes(mode))? true : false);
+  const [admin, setAdmin] = React.useState({
       firstName: "Nuj John Henry",
       middleName: "Vera",
       lastName: "Reyes",
@@ -35,12 +35,12 @@ const Resume = () => {
       completeAddress: "145 Panapaan IV, Bacoor, Cavite"
   });
 
-  const [education, educationState] = React.useState([
+  const [education, setEducation] = React.useState([
     { title: "BS in Information Technology", school: "Cavite State University - Imus Campus", dateInterval: "October 2015 - June 2020" },
     { title: "NC II in Computer Systems Servicing", school: "Christ The King College", dateInterval: "January 2019" }
   ]);
 
-  const [experience, experienceState] = React.useState([
+  const [experience, setExperience] = React.useState([
     { 
     title: "Junior Software Engineer", company: "Xypher Solutions Inc.", dateInterval: "July 2020 - Present", 
     reponsibilities: [
@@ -60,7 +60,7 @@ const Resume = () => {
     },
   ]);
 
-  const [frontend, frontendState] = React.useState([
+  const [frontend, setFrontend] = React.useState([
     { "type": "React.js", "level": 90 },
     { "type": "Javascript", "level": 92 },
     { "type": "JQuery", "level": 87 },
@@ -69,19 +69,19 @@ const Resume = () => {
     { "type": "SASS", "level": 85 },
   ]);
 
-  const [backend, backendState] = React.useState([
+  const [backend, setBackend] = React.useState([
     { "type": "Node.js", "level": 94 },
     { "type": "PHP", "level": 91 },
     { "type": "SQL", "level": 93 },
     { "type": "MongoDB", "level": 91 },
   ]);
 
-  const [miscellaneous, miscellaneousState] = React.useState([
+  const [miscellaneous, setMiscellaneous] = React.useState([
     { "type": "Git", "level": 94 },
     { "type": "Design", "level": 84 },
   ]);
 
-  const [interest, interestState] = React.useState([
+  const [interest, setInterest] = React.useState([
     { title: "Movies", icon: "fa-film" },
     { title: "Music", icon: "fa-headphones" },
     { title: "Swim", icon: "fa-swimmer" },
@@ -91,7 +91,7 @@ const Resume = () => {
   /* Effects */
   React.useEffect(() => {
     setTimeout(() => {
-      loadingState(false);
+      setIsLoading(false);
     }, 1000);
   }, []);
 
@@ -154,7 +154,7 @@ const Resume = () => {
   }
 
   const switchMode = (e) => {
-    lightModesState(e.target.checked);
+    setIsLightMode(e.target.checked);
     localStorage.setItem("light-mode", e.target.checked);
   }
 
