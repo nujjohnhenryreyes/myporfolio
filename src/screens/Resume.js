@@ -17,6 +17,7 @@ import SideNav from '../components/SideNav';
 import Background from '../components/Background';
 import Theme from '../constants/Theme';
 import SkillBar from 'react-skillbars';
+import Images from '../constants/Images'; 
 
 const Resume = () => {
   const mode = localStorage.getItem("light-mode");
@@ -24,23 +25,23 @@ const Resume = () => {
   /* States */
   const [isLoading, setIsLoading] = React.useState(true);
   const [isLightMode, setIsLightMode] = React.useState(([null, `true`].includes(mode))? true : false);
-  const [admin, setAdmin] = React.useState({
-      firstName: "Nuj John Henry",
-      middleName: "Vera",
-      lastName: "Reyes",
-      designation: "Software Engineer",
-      image: "gradpic.jpg",
-      mobileNumber: "9650624447",
-      emailAddress: "nujjohnhenryreyes@gmail.com",
-      completeAddress: "145 Panapaan IV, Bacoor, Cavite"
-  });
+  const admin = {
+    firstName: "Nuj John Henry",
+    middleName: "Vera",
+    lastName: "Reyes",
+    designation: "Software Engineer",
+    image: Images.GradPic,
+    mobileNumber: "9650624447",
+    emailAddress: "nujjohnhenryreyes@gmail.com",
+    completeAddress: "145 Panapaan IV, Bacoor, Cavite"
+  };
 
-  const [education, setEducation] = React.useState([
+  const education = [
     { title: "BS in Information Technology", school: "Cavite State University - Imus Campus", dateInterval: "October 2015 - June 2020" },
     { title: "NC II in Computer Systems Servicing", school: "Christ The King College", dateInterval: "January 2019" }
-  ]);
+  ];
 
-  const [experience, setExperience] = React.useState([
+  const experience = [
     { 
     title: "Junior Software Engineer", company: "Xypher Solutions Inc.", dateInterval: "July 2020 - Present", 
     reponsibilities: [
@@ -58,35 +59,35 @@ const Resume = () => {
         "Design payslip for clients and created a wireframe using Microsoft Powerpoint.",
       ] 
     },
-  ]);
+  ];
 
-  const [frontend, setFrontend] = React.useState([
+  const frontend = [
     { "type": "React.js", "level": 90 },
     { "type": "Javascript", "level": 92 },
     { "type": "JQuery", "level": 87 },
     { "type": "HTML/CSS", "level": 88 },
     { "type": "Bootstrap", "level": 83 },
     { "type": "SASS", "level": 85 },
-  ]);
+  ];
 
-  const [backend, setBackend] = React.useState([
+  const backend = [
     { "type": "Node.js", "level": 94 },
     { "type": "PHP", "level": 91 },
     { "type": "SQL", "level": 93 },
     { "type": "MongoDB", "level": 91 },
-  ]);
+  ];
 
-  const [miscellaneous, setMiscellaneous] = React.useState([
+  const miscellaneous = [
     { "type": "Git", "level": 94 },
     { "type": "Design", "level": 84 },
-  ]);
+  ];
 
-  const [interest, setInterest] = React.useState([
+  const interest = [
     { title: "Movies", icon: "fa-film" },
     { title: "Music", icon: "fa-headphones" },
     { title: "Swim", icon: "fa-swimmer" },
     { title: "Chess", icon: "fa-chess" },
-  ]);
+  ];
 
   /* Effects */
   React.useEffect(() => {
@@ -100,7 +101,7 @@ const Resume = () => {
     e.target.style.backgroundColor = color;
   } 
 
-  /* Functions */
+  /* Components */
   const getEducationItems = () => {
     const listItems = education.map((item, index) =>
       <div className="col-6" style={styles.educationContainer} key={index}>
@@ -206,7 +207,7 @@ const Resume = () => {
                                 <Col sm={12} style={styles.personalInfoColumn}>
                                     <div style={styles.flexBox}>
                                         <div>
-                                            <img src={`${require(`../assets/img/formal-attire-with-background.jpg`)}`} alt="" style={styles.image}/>
+                                            <img src={`${Images.FormalAttireBackground}`} alt="" style={styles.image}/>
                                             <div align="center">
                                                 <Button 
                                                     onMouseEnter={(e) => handleMouseHover(e, "#325083")} 

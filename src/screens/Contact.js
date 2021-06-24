@@ -21,6 +21,7 @@ import Background from '../components/Background';
 import Theme from '../constants/Theme';
 import Lightbox from 'react-image-lightbox';
 import ComponentValidator from "simple-react-validator";
+import Images from '../constants/Images'; 
 const validator = new ComponentValidator();
 
 const Index = () => {
@@ -30,24 +31,24 @@ const Index = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [isLightMode, setIsLightMode] = React.useState(([null, `true`].includes(mode))? true : false);
   const [errors, setErrors] = React.useState({});
-  const [admin, adminState] = React.useState({
-      firstName: "Nuj John Henry",
-      middleName: "Vera",
-      lastName: "Reyes",
-      designation: "Software Engineer",
-      image: "gradpic.jpg",
-      mobileNumber: "9650624447",
-      emailAddress: "nujjohnhenryreyes@gmail.com",
-      completeAddress: "145 Panapaan IV, Bacoor, Cavite"
-  });
-  
   const [form, setForm] = React.useState({
     fullName: "",
     emailAddress: "",
     subject: "",
     message: ""
- });
-  
+  });
+  const admin = {
+    firstName: "Nuj John Henry",
+    middleName: "Vera",
+    lastName: "Reyes",
+    designation: "Software Engineer",
+    image: Images.GradPic,
+    mobileNumber: "9650624447",
+    emailAddress: "nujjohnhenryreyes@gmail.com",
+    completeAddress: "145 Panapaan IV, Bacoor, Cavite"
+  };
+
+
   /* Effects */
   React.useEffect(() => {
     setTimeout(() => {
@@ -76,7 +77,7 @@ const Index = () => {
   }
 
   const handleMouseHover = (e, hover) => {
-    e.target.style.border = (!hover) 
+    return e.target.style.border = (!hover) 
         ? "0px" 
         : "1px solid #edede5";
   } 
@@ -86,6 +87,7 @@ const Index = () => {
     localStorage.setItem("light-mode", e.target.checked);
   }
 
+  /*Components*/
   if(!isLoading){
     return (
       <div className="main">  

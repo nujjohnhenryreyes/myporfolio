@@ -21,6 +21,7 @@ import Background from '../components/Background';
 import Theme from '../constants/Theme';
 import Lightbox from 'react-image-lightbox';
 import ComponentValidator from "simple-react-validator";
+import Images from '../constants/Images'; 
 const validator = new ComponentValidator();
 
 const Index = () => {
@@ -35,7 +36,7 @@ const Index = () => {
       middleName: "Vera",
       lastName: "Reyes",
       designation: "Software Engineer",
-      image: "gradpic.jpg",
+      image: Images.GradPic,
       mobileNumber: "9650624447",
       emailAddress: "nujjohnhenryreyes@gmail.com",
       completeAddress: "145 Panapaan IV, Bacoor, Cavite"
@@ -56,12 +57,13 @@ const Index = () => {
   const handleOnChange = (e, stateName) => {
     form[stateName] = e.target.value;
     errors[stateName] = (!e.target.value) ? "Please enter your" : null;
+
     setForm({ ...form });
     setErrors({ ...errors });
   }
 
   const handleMouseHover = (e, hover) => {
-    e.target.style.border = (!hover) 
+    return e.target.style.border = (!hover) 
         ? "0px" 
         : "1px solid #edede5";
   } 
@@ -71,6 +73,7 @@ const Index = () => {
     localStorage.setItem("light-mode", e.target.checked);
   }
   
+  /* Components */
   if(!isLoading){
     return (
       <div className="main">  

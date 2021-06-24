@@ -7,112 +7,94 @@ import {
     CardHeader,
     CardBody,
     CardImg, 
-    CardTitle, 
-    CardSubtitle, 
-    CardText,
-    Button,
     Nav, 
-    NavItem, 
-    NavLink   
+    NavItem,
 } from 'reactstrap';
 import Theme from '../constants/Theme';
+import Links from '../constants/Links';
+import Navigation from '../constants/Navigation';
 
 const SideNav = (props) => {
-    const [navigation, setNavigation] = React.useState({
-        portfolio: "PORTFOLIO",
-        resume: "RESUME",
-        aboutMe: "ABOUT ME",
-        contact: "CONTACT",
-        signIn: "SIGN IN",
-    });
-
-    const [social, setSocial] = React.useState({
-        facebook: "https://www.facebook.com/nujreyes00/",
-        linkedIn: "https://www.linkedin.com/in/nuj-reyes-4250391b3/",
-        gitLab: "https://gitlab.com/nujjohnhenryreyes"
-    });
 
     const handleMouseHover = (e, color) => {
-        e.target.style.backgroundColor = color;
+        return e.target.style.backgroundColor = color;
     }
 
-  return (
-    <Card style={
-        (!props.isLightMode) ? styles.darkCard : styles.lightCard
-        }>
-        <CardHeader style={styles.cardHeader} >
-            <CardImg src={`${require(`../assets/img/${props.admin.image}`)}`} className="profile" alt="profile" style={styles.cardImg}/>
-            <div style={{color: `${(!props.isLightMode) ? Theme.COLORS.WHITE : Theme.COLORS.DARKTEXT}`}}>
-                {`${props.admin.firstName.toUpperCase()} ${props.admin.middleName.charAt(0).toUpperCase()}. ${props.admin.lastName.toUpperCase()}`}
-            </div>
-            <label style={styles.designation}>{ props.admin.designation }</label>
-        </CardHeader>
-        <CardBody style={styles.cardBody}>
-            <Row>
-                <Col sm={12}>               
-                    <Link to="route" target="_blank" onClick={() => { window.open(social.facebook); }} style={styles.socialLinks} >
-                        <i className="fa fa-facebook-square" /> 
-                    </Link>
-                    <Link to="route" target="_blank" onClick={() => { window.open(social.linkedIn); }} style={styles.socialLinks} >
-                        <i className="fa fa-linkedin-square" /> 
-                    </Link>
-                    <Link to="route" target="_blank" onClick={() => { window.open(social.gitLab); }} style={styles.socialLinks} >
-                    <i className="fa fa-gitlab" />
-                    </Link>
-                </Col>
-                <Col sm={12} style={styles.navColumn} align="center">
-                <Nav vertical style={styles.nav}>
-                    <NavItem>
-                        <Link to="/" style={styles.link}>
-                            <div style={styles.aboutMe}   
-                                onMouseEnter={(e) => handleMouseHover(e, "#efae2a")} 
-                                onMouseLeave={(e) => handleMouseHover(e, "#e49d0c")}>
-                                <i className="fa fa-user" style={{ marginRight: "12px" }} />{ navigation.aboutMe }
-                            </div>
+    return (
+        <Card style={(!props.isLightMode) ? styles.darkCard : styles.lightCard}>
+            <CardHeader style={styles.cardHeader} >
+                <CardImg src={props.admin.image} className="profile" alt="profile" style={styles.cardImg}/>
+                <div style={{color: `${(!props.isLightMode) ? Theme.COLORS.WHITE : Theme.COLORS.DARKTEXT}`}}>
+                    {`${props.admin.firstName.toUpperCase()} ${props.admin.middleName.charAt(0).toUpperCase()}. ${props.admin.lastName.toUpperCase()}`}
+                </div>
+                <label style={styles.designation}>{ props.admin.designation }</label>
+            </CardHeader>
+            <CardBody style={styles.cardBody}>
+                <Row>
+                    <Col sm={12}>               
+                        <Link to="route" target="_blank" onClick={() => { window.open(Links.FACEBOOK); }} style={styles.socialLinks} >
+                            <i className="fa fa-facebook-square" /> 
                         </Link>
-                    </NavItem>
-                    <NavItem>
-                        <Link to="/portfolio" style={styles.link}>
-                            <div style={styles.portfolio}
-                                onMouseEnter={(e) => handleMouseHover(e, "#5793dc")} 
-                                onMouseLeave={(e) => handleMouseHover(e, "#467ec3")}>
-                                <i className="fa fa-folder-open" style={{ marginRight: "12px" }} />{ navigation.portfolio }
-                            </div>
+                        <Link to="route" target="_blank" onClick={() => { window.open(Links.LINKEDIN); }} style={styles.socialLinks} >
+                            <i className="fa fa-linkedin-square" /> 
                         </Link>
-                    </NavItem>                
-                    <NavItem>
-                        <Link to="/resume" style={styles.link}>
-                            <div style={styles.resume}
-                                onMouseEnter={(e) => handleMouseHover(e, "#f55499")} 
-                                onMouseLeave={(e) => handleMouseHover(e, "#e84289")}>
-                                <i className="fa fa-file" style={{ marginRight: "12px" }} />{ navigation.resume }
-                            </div>
+                        <Link to="route" target="_blank" onClick={() => { window.open(Links.GITLAB); }} style={styles.socialLinks} >
+                        <i className="fa fa-gitlab" />
                         </Link>
-                    </NavItem>                 
-                    <NavItem>
-                        <Link to="/contact" style={styles.link}>
-                            <div style={styles.contact}
-                                onMouseEnter={(e) => handleMouseHover(e, "#42c4bd")} 
-                                onMouseLeave={(e) => handleMouseHover(e, "#3fbbb4")}>
-                                <i className="fa fa-phone" style={{ marginRight: "12px" }} />{ navigation.contact }
-                            </div>
-                        </Link>
-                    </NavItem>
-                    {/* <NavItem>
-                        <Link to="/signin" style={styles.link}>
-                            <div style={styles.signIn}     
-                                onMouseEnter={(e) => handleMouseHover(e, "#9dc840")} 
-                                onMouseLeave={(e) => handleMouseHover(e, "#90b73b")}>
-                                <i className="fa fa-sign-in" style={{ marginRight: "12px" }} />{ navigation.signIn }
-                            </div>
-                        </Link>
-                    </NavItem> */}
-                </Nav>
-                </Col>
-            </Row>
-        </CardBody>
-    </Card>
-  );
+                    </Col>
+                    <Col sm={12} style={styles.navColumn} align="center">
+                    <Nav vertical style={styles.nav}>
+                        <NavItem>
+                            <Link to="/" style={styles.link}>
+                                <div style={styles.aboutMe}   
+                                    onMouseEnter={(e) => handleMouseHover(e, "#efae2a")} 
+                                    onMouseLeave={(e) => handleMouseHover(e, "#e49d0c")}>
+                                    <i className="fa fa-user" style={{ marginRight: "12px" }} />{ Navigation.ABOUTME }
+                                </div>
+                            </Link>
+                        </NavItem>
+                        <NavItem>
+                            <Link to="/portfolio" style={styles.link}>
+                                <div style={styles.portfolio}
+                                    onMouseEnter={(e) => handleMouseHover(e, "#5793dc")} 
+                                    onMouseLeave={(e) => handleMouseHover(e, "#467ec3")}>
+                                    <i className="fa fa-folder-open" style={{ marginRight: "12px" }} />{ Navigation.PORTFOLIO }
+                                </div>
+                            </Link>
+                        </NavItem>                
+                        <NavItem>
+                            <Link to="/resume" style={styles.link}>
+                                <div style={styles.resume}
+                                    onMouseEnter={(e) => handleMouseHover(e, "#f55499")} 
+                                    onMouseLeave={(e) => handleMouseHover(e, "#e84289")}>
+                                    <i className="fa fa-file" style={{ marginRight: "12px" }} />{ Navigation.RESUME }
+                                </div>
+                            </Link>
+                        </NavItem>                 
+                        <NavItem>
+                            <Link to="/contact" style={styles.link}>
+                                <div style={styles.contact}
+                                    onMouseEnter={(e) => handleMouseHover(e, "#42c4bd")} 
+                                    onMouseLeave={(e) => handleMouseHover(e, "#3fbbb4")}>
+                                    <i className="fa fa-phone" style={{ marginRight: "12px" }} />{ Navigation.CONTACT }
+                                </div>
+                            </Link>
+                        </NavItem>
+                        {/* <NavItem>
+                            <Link to="/signin" style={styles.link}>
+                                <div style={styles.signIn}     
+                                    onMouseEnter={(e) => handleMouseHover(e, "#9dc840")} 
+                                    onMouseLeave={(e) => handleMouseHover(e, "#90b73b")}>
+                                    <i className="fa fa-sign-in" style={{ marginRight: "12px" }} />{ Navigation.SIGNIN }
+                                </div>
+                            </Link>
+                        </NavItem> */}
+                    </Nav>
+                    </Col>
+                </Row>
+            </CardBody>
+        </Card>
+    );
 }
 
 const styles = {

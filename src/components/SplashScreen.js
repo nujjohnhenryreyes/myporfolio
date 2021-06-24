@@ -2,40 +2,41 @@ import React from 'react';
 import ReactLoading from 'react-loading';
 import Background from './Background';
 import Theme from '../constants/Theme';
+import Images from '../constants/Images'; 
 
 const SplashScreen = () => {
-  const [admin, setAdmin] = React.useState({
+  const admin = {
     firstName: "Nuj John Henry",
     middleName: "Vera",
     lastName: "Reyes",
     designation: "Software Engineer",
-    image: "gradpic.jpg"
-});
+    image: Images.GradPic
+  };
 
   return (
-  <div className="main">  
-    <Background />
-      <div style={styles.frontScreen}>
-        <div className="col" style={styles.body}>
-          <div className="vertical-center" style={styles.personSection}>
-            <div style={styles.nameSection}>
-              <span>{admin.firstName.toUpperCase()} { admin.middleName.charAt(0) + '.' } </span>
-              <span style={styles.lastname}>{admin.lastName.toUpperCase()}</span>
-            </div>
-            <div style={styles.designationSection}>
-              <span style={styles.designationFirstWord}>{admin.designation.split(" ")[0]} </span>
-              <span>{admin.designation.split(" ")[1]}</span>
+    <div className="main">  
+      <Background />
+        <div style={styles.frontScreen}>
+          <div className="col" style={styles.body}>
+            <div className="vertical-center" style={styles.personSection}>
+              <div style={styles.nameSection}>
+                <span>{admin.firstName.toUpperCase()} { admin.middleName.charAt(0) + '.' } </span>
+                <span style={styles.lastname}>{admin.lastName.toUpperCase()}</span>
+              </div>
+              <div style={styles.designationSection}>
+                <span style={styles.designationFirstWord}>{admin.designation.split(" ")[0]} </span>
+                <span>{admin.designation.split(" ")[1]}</span>
+              </div>
             </div>
           </div>
+          <div className="col" style={styles.footerSection}> 
+              <div  style={styles.footerSectionUp} />
+              <div style={styles.footerSectionDown} align="center">
+                <ReactLoading type="bubbles" color={`${Theme.COLORS.PRIMARY}`} height={20} width={150} />
+              </div>
+          </div>
         </div>
-        <div className="col" style={styles.footerSection}> 
-            <div  style={styles.footerSectionUp} />
-            <div style={styles.footerSectionDown} align="center">
-              <ReactLoading type="bubbles" color={`${Theme.COLORS.PRIMARY}`} height={20} width={150} />
-            </div>
-        </div>
-      </div>
-  </div>
+    </div>
   );
 }
 

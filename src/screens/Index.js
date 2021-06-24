@@ -16,6 +16,7 @@ import SplashScreen from '../components/SplashScreen';
 import SideNav from '../components/SideNav';
 import Background from '../components/Background';
 import Theme from '../constants/Theme'; 
+import Images from '../constants/Images'; 
 
 const Index = () => {
   const mode = localStorage.getItem("light-mode");
@@ -23,18 +24,32 @@ const Index = () => {
   /* States */
   const [isLoading, setIsLoading] = React.useState(true);
   const [isLightMode, setIsLightMode] = React.useState(([null, `true`].includes(mode))? true : false);
-  const [admin, setAdmin] = React.useState({
-      firstName: "Nuj John Henry",
-      middleName: "Vera",
-      lastName: "Reyes",
-      designation: "Software Engineer",
-      image: "gradpic.jpg",
-      mobileNumber: "9650624447",
-      emailAddress: "nujjohnhenryreyes@gmail.com",
-      completeAddress: "145 Panapaan IV, Bacoor, Cavite"
-  });
-  
-  const [abouts, setAbouts] = React.useState([
+  const admin = {
+    firstName: "Nuj John Henry",
+    middleName: "Vera",
+    lastName: "Reyes",
+    designation: "Software Engineer",
+    image: Images.GradPic,
+    mobileNumber: "9650624447",
+    emailAddress: "nujjohnhenryreyes@gmail.com",
+    completeAddress: "145 Panapaan IV, Bacoor, Cavite"
+  };
+  const technologies = [
+    { title: "ReactJS", image: Images.ReactJS },
+    { title: "NodeJS", image: Images.NodeJS },
+    { title: "MongoDB", image: Images.MongoDB },
+    { title: "Javascript", image: Images.Javascript },
+    { title: "JQuery", image: Images.JQuery },
+    { title: "PHP", image: Images.PHP },
+    { title: "Xampp", image: Images.Xampp },   
+    { title: "HTML5", image: Images.HTML5 },
+    { title: "CSS3", image: Images.CSS3 },
+    { title: "Bootstrap 4", image: Images.Bootstrap4 },
+    { title: "SASS", image: Images.Sass },
+    { title: "MS SQL", image: Images.MySQL },
+    { title: "GIT BASH", image: Images.Bash },
+  ];
+  const abouts = [
     "I'm a software engineer specialized in frontend and backend development for complex scalable web apps." + 
     "I enjoy taking complex problems and turning them into simple, better and understandable way." +
     "I also love handling database server and building queries." +
@@ -42,23 +57,7 @@ const Index = () => {
     ,
     "Want to know more about me?" + 
     "You can directly download my resume or view my latest project."
-  ]);
-
-  const [technologies, setTechnologies] = React.useState([
-    { title: "ReactJS", image: "reactjs.png" },
-    { title: "NodeJS", image: "nodejs.jpg" },
-    { title: "MongoDB", image: "mongodb.png" },
-    { title: "Javascript", image: "javascript.jpg" },
-    { title: "JQuery", image: "jquery.png" },
-    { title: "PHP", image: "php.png" },
-    { title: "Xampp", image: "xampp.png" },   
-    { title: "HTML5", image: "html5.png" },
-    { title: "CSS3", image: "css3.png" },
-    { title: "Bootstrap 4", image: "bootstrap4.png" },
-    { title: "SASS", image: "sass.jpg" },
-    { title: "MS SQL", image: "mssql.png" },
-    { title: "GIT BASH", image: "gitbash.jpg" },
-  ]);
+  ];
 
   /* Effects */
   React.useEffect(() => {
@@ -69,14 +68,20 @@ const Index = () => {
 
   /* Handles */
   const handleMouseHover = (e, color) => {
-    e.target.style.backgroundColor = color;
+    return e.target.style.backgroundColor = color;
   }
 
-  /* Functions */
+  const switchMode = (e) => {
+    setIsLightMode(e.target.checked);
+    localStorage.setItem("light-mode", e.target.checked);
+  }
+
+  /* Components */
   const getAboutItems = () => {
     const listItems = abouts.map((item, index) =>
       <CardText key={index} style={styles.cardText}>{item}</CardText>
     );
+
     return listItems;
   }
 
@@ -84,16 +89,12 @@ const Index = () => {
     const listItems = technologies.map((item, index) => ( 
     <div style={styles.imgTechBox} key={index}>
       <div style={styles.imgTechContainer}>
-        <img src={`${require(`../assets/img/${item.image}`)}`} alt="" className="techonology"  style={styles.imgTech} />
+        <img src={item.image} alt="" className="techonology"  style={styles.imgTech} />
       </div>
       <p>{item.title}</p>
     </div> ));
-    return listItems;                                   
-  }
 
-  const switchMode = (e) => {
-    setIsLightMode(e.target.checked);
-    localStorage.setItem("light-mode", e.target.checked);
+    return listItems;                                   
   }
 
   if(!isLoading){
@@ -166,7 +167,7 @@ const Index = () => {
                                   </div>                                           
                                 </Col>
                                 <Col lg={5} xl={3} >
-                                  <CardImg src={`${require(`../assets/img/formal-attire-with-background.jpg`)}`} alt="" style={styles.adminImg} />
+                                  <CardImg src={`${Images.FormalAttireBackground}`} alt="" style={styles.adminImg} />
                                   <div className="row" style={styles.contactInfo}>
                                     <div className="col-12">
                                       <label className="fa fa-phone" style={styles.contactIcon} />

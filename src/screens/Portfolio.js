@@ -17,6 +17,7 @@ import SideNav from '../components/SideNav';
 import Background from '../components/Background';
 import Theme from '../constants/Theme';
 import Lightbox from 'react-image-lightbox';
+import Images from '../constants/Images'; 
 
 const Index = () => {
   const mode = localStorage.getItem("light-mode");
@@ -27,34 +28,27 @@ const Index = () => {
   const [imageViewer, setImageViewer] = React.useState({ photoIndex: 0, isOpen: false });
   const [projectCode, setProjectCode] = React.useState(null);
   const [images, setImages] = React.useState([]);
-  const [admin, setAdmin] = React.useState({
-      firstName: "Nuj John Henry",
-      middleName: "Vera",
-      lastName: "Reyes",
-      designation: "Software Engineer",
-      image: "gradpic.jpg",
-      mobileNumber: "9650624447",
-      emailAddress: "nujjohnhenryreyes@gmail.com",
-      completeAddress: "145 Panapaan IV, Bacoor, Cavite"
-  });
+  const admin = {
+    firstName: "Nuj John Henry",
+    middleName: "Vera",
+    lastName: "Reyes",
+    designation: "Software Engineer",
+    image: Images.GradPic,
+    mobileNumber: "9650624447",
+    emailAddress: "nujjohnhenryreyes@gmail.com",
+    completeAddress: "145 Panapaan IV, Bacoor, Cavite"
+  };
+  const projects = [
+    { 
+      title: "THESIS: eJOBCAV", 
+      finishedOn: "July 2019",
+      stack: "HTML5 / CSS3 / Javascript / PHP / MySQL",        
+      selectedImage: Images.Thesis[0],
+      projectCode: "PROJECT1",
+      images: Images.Thesis
+    },
+  ];
 
-  const [projects, setProjects] = React.useState([
-      { 
-        title: "THESIS: eJOBCAV", 
-        finishedOn: "July 2019",
-        stack: "HTML5 / CSS3 / Javascript / PHP / MySQL",        
-        selectedImage: "ejobcav/1-home.PNG",
-        strCode: "xhsth",
-        images: [
-          "ejobcav/1-home.PNG", "ejobcav/2-about.PNG", "ejobcav/3-articles.PNG", "ejobcav/4-achievements.PNG", "ejobcav/5-affiliation.PNG", "ejobcav/6-viewcompany.PNG", "ejobcav/7-viewjobs.PNG", "ejobcav/8-gallery.PNG", "ejobcav/9-events.PNG", "ejobcav/10-faqs.PNG", "ejobcav/11-search.PNG",
-          "ejobcav/12-contact-us.PNG", "ejobcav/13-login.PNG", "ejobcav/14-complete-info.PNG", "ejobcav/15-joblists.PNG", "ejobcav/16-personal-info.PNG", "ejobcav/17-education.PNG", "ejobcav/18-trainings.PNG", "ejobcav/19-eligibility.PNG", "ejobcav/20-preferences.PNG", "ejobcav/21-work-experience.PNG", "ejobcav/22-skills.PNG",
-          "ejobcav/23-nsrp-form.PNG", "ejobcav/24-resume.PNG", "ejobcav/25-applied-jobs.PNG", "ejobcav/26-application-status.PNG", "ejobcav/27-email.PNG", "ejobcav/28-notification.PNG", "ejobcav/29-saved-jobs.PNG", "ejobcav/30-recommendation.PNG", "ejobcav/31-activity-log.PNG", "ejobcav/32-company-dashboard.PNG", "ejobcav/33-accept-event-invitation.PNG",
-          "ejobcav/34-job-applications.PNG", "ejobcav/35-position-applied.PNG", "ejobcav/36-submitted-resume.PNG", "ejobcav/37-submitted-nsrp-form.PNG", "ejobcav/38-interview-scheduler.PNG", "ejobcav/39-video-interview.PNG", "ejobcav/40-company-reports.PNG", "ejobcav/41-application-record.PNG", "ejobcav/42-admin-dashboard.PNG", "ejobcav/43-vacancy-approval.PNG", "ejobcav/44-event-posting.PNG",
-          "ejobcav/45-users.PNG", "ejobcav/46-companies.PNG", "ejobcav/47-file-maintenance.PNG", "ejobcav/48-archives.PNG", "ejobcav/49-admin-reports.PNG", "ejobcav/50-job-seekers.PNG", "ejobcav/51-backup-adn-restore.PNG"
-        ] 
-      },
-  ]);
-  
   /* Effects */
   React.useEffect(() => {
     setTimeout(() => {
@@ -62,22 +56,17 @@ const Index = () => {
     }, 1000);
   }, []);
 
+  /* Handles */
   const handleMouseHover = (e, status) => {
       setProjectCode(status);
-      e.target.style.backgroundColor = (!status) ? "transparent" : "#767777";     
+      return e.target.style.backgroundColor = (!status) ? "transparent" : "#767777";     
   }
 
   const handleOnClick = (e, index) => {
-    const setOfImages = projects[index].images;
-    const newSetOfImages = [];
-    for(let i = 0; i < setOfImages.length; i++){
-        newSetOfImages.push(require(`../assets/img/${setOfImages[i]}`))
-    }
-    setImages(newSetOfImages);    
-    setImageViewer({ ...imageViewer, ["isOpen"]: true })     
+    setImages(projects[index].images);    
+    setImageViewer({ ...imageViewer, isOpen: true });
   }
 
-  /* Functions */
   const onCloseRequest = () => {
     setImages([]);
     setImageViewer({ photoIndex: 0, isOpen: false });
@@ -88,24 +77,25 @@ const Index = () => {
     localStorage.setItem("light-mode", e.target.checked);
   }
 
+  /* Components */
   const getProjectItems = () => {
     const listItems = projects.map((item, index) =>
       <div className="col-md-12 col-xl-4" style={styles.portfolioColumn} key={index}>
         <Card body style={styles.portfolioBox}>
             <div style={styles.boxBody} align="center">
                 <div 
-                onMouseEnter={(e) => handleMouseHover(e, item.strCode)}
-                onMouseLeave={(e) => handleMouseHover(e, null)}     
-                onClick={(e) => handleOnClick(e, index)}                                        
-                style={styles.imageContainer} />
-                <CardImg src={`${require(`../assets/img/${item.selectedImage}`)}`} 
-                alt=""
-                className={classnames({
-                    "portfolio-on": (projectCode === item.strCode),
-                    "portfolio-off": (projectCode !== item.strCode),
-                  })}
-                style={styles.image} />
-            </div>
+                  onMouseEnter={(e) => handleMouseHover(e, item.projectCode)}
+                  onMouseLeave={(e) => handleMouseHover(e, null)}     
+                  onClick={(e) => handleOnClick(e, index)}                                        
+                  style={styles.imageContainer} />
+                  <CardImg src={`${item.selectedImage}`} 
+                  alt=""
+                  className={classnames({
+                      "portfolio-on": (projectCode === item.projectCode),
+                      "portfolio-off": (projectCode !== item.projectCode),
+                    })}
+                  style={styles.image} />
+              </div>
             <div style={styles.boxFooter}>
                <div>
                 <label>{item.title}</label>

@@ -1,10 +1,11 @@
 import React from 'react';
+import Images from '../constants/Images'; 
 
 const Background = () => {
   return (
     <div style={styles.backScreen}>
         <div style={styles.imageContainer}>
-            <img src={`${require("../assets/img/codetag.jpg")}`} style={styles.img} />
+            <img src={Images.CodeTag} style={styles.img} />
         </div>
         <div style={styles.transparency} />
     </div>
