@@ -4,11 +4,9 @@ import {
   Row,
   Col, 
   Card,
-  CardHeader,
   CardBody,
   CardImg, 
   CardTitle, 
-  CardSubtitle, 
   CardText,
   Button  
 } from 'reactstrap';
@@ -17,6 +15,7 @@ import SideNav from '../components/SideNav';
 import Background from '../components/Background';
 import Theme from '../constants/Theme'; 
 import Images from '../constants/Images'; 
+import Information from '../constants/Information'; 
 
 const Index = () => {
   const mode = localStorage.getItem("light-mode");
@@ -24,16 +23,6 @@ const Index = () => {
   /* States */
   const [isLoading, setIsLoading] = React.useState(true);
   const [isLightMode, setIsLightMode] = React.useState(([null, `true`].includes(mode))? true : false);
-  const admin = {
-    firstName: "Nuj John Henry",
-    middleName: "Vera",
-    lastName: "Reyes",
-    designation: "Software Engineer",
-    image: Images.GradPic,
-    mobileNumber: "9650624447",
-    emailAddress: "nujjohnhenryreyes@gmail.com",
-    completeAddress: "145 Panapaan IV, Bacoor, Cavite"
-  };
   const technologies = [
     { title: "ReactJS", image: Images.ReactJS },
     { title: "NodeJS", image: Images.NodeJS },
@@ -104,7 +93,7 @@ const Index = () => {
         <div style={styles.frontScreen}>
            <Row style={styles.mainRow}> 
               <Col md={5} lg={4} xl={3} style={styles.colSideNav}>
-                <SideNav admin={admin} isLightMode={isLightMode} />
+                <SideNav admin={Information} isLightMode={isLightMode} />
               </Col>
               <Col md={7} lg={8} xl={9} style={styles.colBody}>
                 <Card body style={(!isLightMode) ? styles.darkCard : styles.lightCard}>
@@ -144,7 +133,7 @@ const Index = () => {
                               <Row style={styles.introRow}>
                                 <Col lg={7}  xl={9} style={styles.introLeft}>
                                   <CardTitle style={styles.name}>
-                                    {`${admin.firstName.toUpperCase()} ${admin.middleName.charAt(0).toUpperCase()}. ${admin.lastName.toUpperCase()}`}
+                                    {`${Information.firstName.toUpperCase()} ${Information.middleName.charAt(0).toUpperCase()}. ${Information.lastName.toUpperCase()}`}
                                   </CardTitle>                      
                                   { getAboutItems() }
                                   <div className="row">
@@ -171,15 +160,15 @@ const Index = () => {
                                   <div className="row" style={styles.contactInfo}>
                                     <div className="col-12">
                                       <label className="fa fa-phone" style={styles.contactIcon} />
-                                      <span style={styles.contactText}>{`+63 ${admin.mobileNumber}`}</span>
+                                      <span style={styles.contactText}>{`+63 ${Information.mobileNumber}`}</span>
                                     </div>
                                     <div className="col-12">  
                                       <label className="fa fa-envelope" style={styles.contactIcon} />
-                                      <span style={styles.contactText}>{admin.emailAddress}</span>
+                                      <span style={styles.contactText}>{Information.emailAddress}</span>
                                     </div>
                                     <div className="col-12">  
                                       <label className="fa fa-map-marker" style={styles.contactIcon} />
-                                      <span style={styles.contactText}>{admin.completeAddress}</span>
+                                      <span style={styles.contactText}>{Information.completeAddress}</span>
                                     </div>
                                   </div>
                                 </Col>

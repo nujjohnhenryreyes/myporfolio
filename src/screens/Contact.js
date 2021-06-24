@@ -4,12 +4,7 @@ import {
   Row,
   Col, 
   Card,
-  CardHeader,
   CardBody,
-  CardImg, 
-  CardTitle, 
-  CardSubtitle, 
-  CardText,
   Button,
   FormGroup,
   Form,
@@ -21,6 +16,7 @@ import Background from '../components/Background';
 import Theme from '../constants/Theme';
 import ComponentValidator from "simple-react-validator";
 import Images from '../constants/Images'; 
+import Information from '../constants/Information'; 
 const validator = new ComponentValidator();
 
 const Index = () => {
@@ -36,17 +32,6 @@ const Index = () => {
     subject: "",
     message: ""
   });
-  const admin = {
-    firstName: "Nuj John Henry",
-    middleName: "Vera",
-    lastName: "Reyes",
-    designation: "Software Engineer",
-    image: Images.GradPic,
-    mobileNumber: "9650624447",
-    emailAddress: "nujjohnhenryreyes@gmail.com",
-    completeAddress: "145 Panapaan IV, Bacoor, Cavite"
-  };
-
 
   /* Effects */
   React.useEffect(() => {
@@ -94,7 +79,7 @@ const Index = () => {
         <div style={styles.frontScreen}>
            <Row style={styles.mainRow}> 
               <Col md={5} lg={4} xl={3} style={styles.colSideNav}>
-                <SideNav admin={admin} isLightMode={isLightMode} />
+                <SideNav admin={Information} isLightMode={isLightMode} />
               </Col>
               <Col md={7} lg={8} xl={9} style={styles.colBody}>
                 <Card body style={(!isLightMode) ? styles.darkCard : styles.lightCard}>

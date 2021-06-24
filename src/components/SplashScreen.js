@@ -3,15 +3,9 @@ import ReactLoading from 'react-loading';
 import Background from './Background';
 import Theme from '../constants/Theme';
 import Images from '../constants/Images'; 
+import Information from '../constants/Information'; 
 
 const SplashScreen = () => {
-  const admin = {
-    firstName: "Nuj John Henry",
-    middleName: "Vera",
-    lastName: "Reyes",
-    designation: "Software Engineer",
-    image: Images.GradPic
-  };
 
   return (
     <div className="main">  
@@ -20,12 +14,12 @@ const SplashScreen = () => {
           <div className="col" style={styles.body}>
             <div className="vertical-center" style={styles.personSection}>
               <div style={styles.nameSection}>
-                <span>{admin.firstName.toUpperCase()} { admin.middleName.charAt(0) + '.' } </span>
-                <span style={styles.lastname}>{admin.lastName.toUpperCase()}</span>
+                <span>{Information.firstName.toUpperCase()} { Information.middleName.charAt(0) + '.' } </span>
+                <span style={styles.lastname}>{Information.lastName.toUpperCase()}</span>
               </div>
               <div style={styles.designationSection}>
-                <span style={styles.designationFirstWord}>{admin.designation.split(" ")[0]} </span>
-                <span>{admin.designation.split(" ")[1]}</span>
+                <span style={styles.designationFirstWord}>{Information.designation.split(" ")[0]} </span>
+                <span>{Information.designation.split(" ")[1]}</span>
               </div>
             </div>
           </div>
