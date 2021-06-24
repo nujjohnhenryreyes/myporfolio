@@ -19,7 +19,6 @@ import SplashScreen from '../components/SplashScreen';
 import SideNav from '../components/SideNav';
 import Background from '../components/Background';
 import Theme from '../constants/Theme';
-import Lightbox from 'react-image-lightbox';
 import ComponentValidator from "simple-react-validator";
 import Images from '../constants/Images'; 
 const validator = new ComponentValidator();
@@ -91,7 +90,7 @@ const Index = () => {
   if(!isLoading){
     return (
       <div className="main">  
-      <Background />
+        <Background />
         <div style={styles.frontScreen}>
            <Row style={styles.mainRow}> 
               <Col md={5} lg={4} xl={3} style={styles.colSideNav}>
@@ -134,7 +133,7 @@ const Index = () => {
                       <Col sm={12} style={styles.contactSection}>
                           <div className="row">                  
                               <div className="col-sm-5 col-md-12 col-lg-4 col-xl-3" style={styles.emailIconContainer}>
-                                <img src={`${require(`../assets/img/email-icon.png`)}`} alt="" style={styles.emailIcon} />
+                                <img src={Images.Email} alt="" style={styles.emailIcon} />
                               </div>
                               <div className="col-sm-7 col-md-12 col-lg-8 col-xl-9" style={{ padding: "40px 10px 0px 10px" }}>
                                 <div className="col">

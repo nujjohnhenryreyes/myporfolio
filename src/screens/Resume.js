@@ -162,7 +162,7 @@ const Resume = () => {
   if(!isLoading){
     return (
       <div className="main">  
-      <Background />
+        <Background />
         <div style={styles.frontScreen}>
            <Row style={styles.mainRow}> 
               <Col md={5} lg={4} xl={3} style={styles.colSideNav}>

@@ -116,21 +116,21 @@ const Index = () => {
   if(!isLoading){
     return (
       <div className="main">  
-      <Background />
-      {imageViewer.isOpen && images.length && (
-            <Lightbox
-                mainSrc={images[imageViewer.photoIndex]}
-                nextSrc={images[(imageViewer.photoIndex + 1) % images.length]}
-                prevSrc={images[(imageViewer.photoIndex + images.length - 1) % images.length]}
-                onCloseRequest={() => onCloseRequest()}
-                onMovePrevRequest={() =>
-                    setImageViewer({ ...imageViewer, ["photoIndex"]: (imageViewer.photoIndex + images.length - 1) % images.length})
-                }
-                onMoveNextRequest={() =>
-                    setImageViewer({ ...imageViewer, ["photoIndex"]: (imageViewer.photoIndex + 1) % images.length })
-                }
-            />
-        )}
+        <Background />
+        {imageViewer.isOpen && images.length && (
+              <Lightbox
+                  mainSrc={images[imageViewer.photoIndex]}
+                  nextSrc={images[(imageViewer.photoIndex + 1) % images.length]}
+                  prevSrc={images[(imageViewer.photoIndex + images.length - 1) % images.length]}
+                  onCloseRequest={() => onCloseRequest()}
+                  onMovePrevRequest={() =>
+                      setImageViewer({ ...imageViewer, ["photoIndex"]: (imageViewer.photoIndex + images.length - 1) % images.length})
+                  }
+                  onMoveNextRequest={() =>
+                      setImageViewer({ ...imageViewer, ["photoIndex"]: (imageViewer.photoIndex + 1) % images.length })
+                  }
+              />
+          )}
         <div style={styles.frontScreen}>
            <Row style={styles.mainRow}> 
               <Col md={5} lg={4} xl={3} style={styles.colSideNav}>

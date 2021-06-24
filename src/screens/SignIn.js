@@ -19,10 +19,8 @@ import SplashScreen from '../components/SplashScreen';
 import SideNav from '../components/SideNav';
 import Background from '../components/Background';
 import Theme from '../constants/Theme';
-import Lightbox from 'react-image-lightbox';
 import ComponentValidator from "simple-react-validator";
 import Images from '../constants/Images'; 
-const validator = new ComponentValidator();
 
 const Index = () => {
   const mode = localStorage.getItem("light-mode");
@@ -31,20 +29,20 @@ const Index = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [isLightMode, setIsLightMode] = React.useState(([null, `true`].includes(mode))? true : false);
   const [errors, setErrors] = React.useState({});
-  const [admin, setAdmin] = React.useState({
-      firstName: "Nuj John Henry",
-      middleName: "Vera",
-      lastName: "Reyes",
-      designation: "Software Engineer",
-      image: Images.GradPic,
-      mobileNumber: "9650624447",
-      emailAddress: "nujjohnhenryreyes@gmail.com",
-      completeAddress: "145 Panapaan IV, Bacoor, Cavite"
-  });
   const [form, setForm] = React.useState({
     username: "",
     password: ""
  });
+ const admin = {
+  firstName: "Nuj John Henry",
+  middleName: "Vera",
+  lastName: "Reyes",
+  designation: "Software Engineer",
+  image: Images.GradPic,
+  mobileNumber: "9650624447",
+  emailAddress: "nujjohnhenryreyes@gmail.com",
+  completeAddress: "145 Panapaan IV, Bacoor, Cavite"
+};
 
   /* Effects */
   React.useEffect(() => {
@@ -77,7 +75,7 @@ const Index = () => {
   if(!isLoading){
     return (
       <div className="main">  
-      <Background />
+        <Background />
         <div style={styles.frontScreen}>
            <Row style={styles.mainRow}> 
               <Col md={5} lg={4} xl={3} style={styles.colSideNav}>
@@ -122,7 +120,7 @@ const Index = () => {
                               <Row style={styles.maxHeight}>
                                 <Col style={styles.gradientBackground} className="d-none d-xl-block" xl={4} align="center">
                                   <div style={styles.imgDiv} className="vertical-center" >
-                                    <CardImg src={`${require(`../assets/img/n-icon.png`)}`} style={styles.img} />
+                                    <CardImg src={Images.Initial} style={styles.img} />
                                     <p>Welcome Administrator</p>
                                   </div>
                                 </Col>
